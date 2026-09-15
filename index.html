@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kawê Keven — Dev Front-end &amp; Cybersegurança</title>
+<meta name="description" content="Portfólio de Kawê Keven Dos Santos Figueredo — estudante de ADS, desenvolvedor front-end e entusiasta de cybersegurança em Sergipe, Brasil.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23ffb454%22>&gt;_</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#080b10;
+    --bg-1:#0d1219;
+    --bg-2:#121926;
+    --bg-3:#182233;
+    --line:rgba(230,237,243,0.09);
+    --line-strong:rgba(230,237,243,0.16);
+    --ink:#e7edf4;
+    --ink-dim:#93a1b3;
+    --ink-faint:#5c6a7d;
+    --amber:#ffb454;
+    --amber-dim:#8a6a3a;
+    --cyan:#7bd6e8;
+    --green:#5fd98a;
+    --mono:'JetBrains Mono', ui-monospace, Consolas, monospace;
+    --sans:'Inter', system-ui, sans-serif;
+    --radius:10px;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 620px at 82% -8%, rgba(255,180,84,0.07), transparent 60%),
+      radial-gradient(900px 500px at -10% 15%, rgba(123,214,232,0.06), transparent 55%),
+      var(--bg-0);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  ::selection{background:var(--amber);color:#1a1204;}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px;}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(8,11,16,0.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .brand{
+    font-family:var(--mono);font-size:15px;font-weight:500;color:var(--ink);
+    text-decoration:none;display:flex;align-items:center;gap:2px;letter-spacing:-0.02em;
+  }
+  .brand .p1{color:var(--green);}
+  .brand .p2{color:var(--ink-dim);}
+  .brand .cur{
+    display:inline-block;width:8px;height:16px;background:var(--amber);margin-left:4px;
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  nav.links{display:flex;gap:28px;font-family:var(--mono);font-size:13.5px;}
+  nav.links a{text-decoration:none;color:var(--ink-dim);transition:color .15s ease;position:relative;}
+  nav.links a:hover{color:var(--amber);}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line-strong);color:var(--ink);border-radius:8px;padding:8px 10px;font-family:var(--mono);}
+  @media (max-width:720px){
+    nav.links{display:none;}
+    .nav-toggle{display:block;}
+    nav.links.open{
+      display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;
+      background:var(--bg-1);border-bottom:1px solid var(--line);padding:16px 24px;gap:16px;
+    }
+  }
+
+  section{padding:96px 0;}
+  @media (max-width:720px){section{padding:64px 0;}}
+
+  .kicker{
+    font-family:var(--mono);font-size:13px;color:var(--ink-faint);margin:0 0 14px;
+  }
+  .kicker::before{content:'// ';color:var(--amber-dim);}
+  h2.section-title{
+    font-family:var(--mono);font-size:clamp(24px,3.4vw,32px);font-weight:600;
+    margin:0 0 40px;color:var(--ink);letter-spacing:-0.01em;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:64px;padding-bottom:80px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px;}}
+
+  .status-pill{
+    display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;
+    color:var(--ink-dim);border:1px solid var(--line-strong);border-radius:999px;padding:6px 12px;
+    margin-bottom:24px;
+  }
+  .status-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+
+  h1.hero-name{
+    font-family:var(--mono);font-weight:700;letter-spacing:-0.02em;
+    font-size:clamp(36px,5.6vw,58px);line-height:1.05;margin:0 0 18px;
+  }
+  h1.hero-name .last{color:var(--ink-dim);}
+  p.hero-role{
+    font-size:18px;color:var(--ink-dim);max-width:46ch;margin:0 0 32px;
+  }
+  p.hero-role strong{color:var(--ink);font-weight:600;}
+
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:13.5px;text-decoration:none;border-radius:8px;
+    padding:12px 20px;display:inline-flex;align-items:center;gap:8px;transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--amber);color:#1a1204;font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--line-strong);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px);}
+
+  /* terminal card */
+  .term{
+    background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .term-bar{
+    display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);
+    background:var(--bg-1);
+  }
+  .term-bar span{width:10px;height:10px;border-radius:50%;background:#3a4353;}
+  .term-bar .title{margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--ink-faint);}
+  .term-body{padding:22px 20px 26px;font-family:var(--mono);font-size:13.5px;color:var(--ink-dim);min-height:230px;}
+  .term-body .ln{margin:0 0 10px;white-space:pre-wrap;}
+  .term-body .prompt{color:var(--green);}
+  .term-body .out{color:var(--ink);}
+  .term-cursor{display:inline-block;width:7px;height:14px;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(1) infinite;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-text p{color:var(--ink-dim);font-size:16px;max-width:62ch;margin:0 0 16px;}
+  .about-text p:last-child{margin-bottom:0;}
+  .facts{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-1);
+    padding:22px 24px;height:fit-content;
+  }
+  .facts dl{margin:0;display:grid;gap:16px;}
+  .facts .row{display:flex;justify-content:space-between;gap:16px;font-size:13.5px;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .facts .row:last-child{border-bottom:none;padding-bottom:0;}
+  .facts dt{color:var(--ink-faint);font-family:var(--mono);}
+  .facts dd{margin:0;color:var(--ink);text-align:right;}
+
+  /* ---------- skills ---------- */
+  .skills-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;}
+  .skill-group h3{
+    font-family:var(--mono);font-size:13px;color:var(--ink-faint);font-weight:500;
+    margin:0 0 16px;text-transform:lowercase;
+  }
+  .chip-row{display:flex;flex-wrap:wrap;gap:9px;}
+  .tool-card{
+    display:flex;align-items:center;gap:10px;min-width:112px;
+    font-family:var(--mono);font-size:12px;color:var(--ink);border:1px solid var(--line-strong);
+    border-radius:8px;padding:10px 12px;background:var(--bg-1);transition:border-color .15s ease, transform .15s ease;
+  }
+  .tool-card:hover{border-color:var(--amber);transform:translateY(-2px);}
+  .tool-card img{width:28px;height:28px;object-fit:contain;}
+  .tool-card span{line-height:1.25;}
+  .study-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+  .study-card{
+    display:flex;align-items:center;gap:12px;min-height:66px;padding:12px 14px;
+    color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;background:var(--bg-1);
+    transition:border-color .15s ease,transform .15s ease;
+  }
+  .study-card:hover{border-color:var(--cyan);transform:translateY(-2px);}
+  .study-card img{width:34px;height:34px;object-fit:contain;}
+  .study-card span{font-family:var(--mono);font-size:12px;line-height:1.3;}
+
+  /* ---------- projects ---------- */
+  .proj-featured{display:grid;gap:22px;margin-bottom:22px;}
+  .proj-card{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-1);
+    padding:28px 28px 26px;transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    will-change:transform;
+  }
+  .proj-card:hover{border-color:var(--line-strong);box-shadow:0 24px 48px -28px rgba(0,0,0,0.55);}
+  .proj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:12px;flex-wrap:wrap;}
+  .proj-name{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--ink);margin:0;}
+  .proj-link{
+    font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);text-decoration:none;
+    border:1px solid var(--line-strong);border-radius:6px;padding:6px 11px;white-space:nowrap;transition:color .15s ease,border-color .15s ease;
+  }
+  .proj-link:hover{color:var(--amber);border-color:var(--amber);}
+  .proj-desc{color:var(--ink-dim);font-size:14.5px;max-width:68ch;margin:0 0 16px;}
+  .stack-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .stack-tag{font-family:var(--mono);font-size:11.5px;color:var(--cyan);background:rgba(123,214,232,0.08);border:1px solid rgba(123,214,232,0.2);border-radius:5px;padding:4px 9px;}
+
+  .proj-minor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+  .proj-minor{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-1);padding:18px 20px;
+    text-decoration:none;transition:border-color .15s ease,transform .15s ease;
+  }
+  .proj-minor:hover{border-color:var(--line-strong);transform:translateY(-2px);}
+  .proj-minor .pm-name{font-family:var(--mono);font-size:14px;color:var(--ink);display:block;margin-bottom:6px;}
+  .proj-minor .pm-lang{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);}
+
+  /* ---------- certifications ---------- */
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+  .cert-card{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-1);
+    padding:22px;position:relative;overflow:hidden;cursor:zoom-in;
+    transition:border-color .15s ease,transform .15s ease;
+  }
+  .cert-card:hover,.cert-card:focus-visible{border-color:var(--amber);transform:translateY(-3px);}
+  .cert-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--amber),transparent 70%);opacity:.7;
+  }
+  .cert-issuer{font-family:var(--mono);font-size:11.5px;color:var(--amber);letter-spacing:0.02em;margin-bottom:10px;}
+  .cert-name{font-size:15.5px;color:var(--ink);font-weight:600;margin:0 0 10px;line-height:1.4;}
+  .cert-meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .cert-card a{display:block;text-decoration:none;color:inherit;}
+  .cert-preview{
+    position:fixed;inset:3px;z-index:100;display:grid;place-items:center;padding:clamp(18px,4vw,48px);
+    background:rgba(8,11,16,0.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;
+  }
+  .cert-preview.visible{opacity:1;visibility:visible;}
+  .cert-preview img{max-width:min(100%,980px);max-height:calc(100vh - 42px);width:auto;height:auto;object-fit:contain;border:1px solid rgba(255,255,255,.28);box-shadow:0 20px 80px rgba(0,0,0,.55);}
+  .cert-preview figcaption{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.72);white-space:nowrap;}
+
+  /* ---------- contact ---------- */
+  .contact-box{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-1);
+    padding:44px;text-align:left;display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;
+  }
+  @media (max-width:720px){.contact-box{grid-template-columns:1fr;padding:30px;}}
+  .contact-box h2{font-family:var(--mono);font-size:26px;margin:0 0 12px;}
+  .contact-box p{color:var(--ink-dim);margin:0;max-width:44ch;}
+  .contact-links{display:flex;flex-direction:column;gap:12px;}
+  .contact-link{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    font-family:var(--mono);font-size:13.5px;text-decoration:none;color:var(--ink);
+    border:1px solid var(--line-strong);border-radius:8px;padding:13px 16px;
+    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .contact-link:hover{border-color:var(--amber);color:var(--amber);transform:translateX(3px);}
+  .contact-link .arrow{color:var(--ink-faint);}
+  .contact-link:hover .arrow{color:var(--amber);}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-faint);flex-wrap:wrap;gap:10px;}
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a href="#top" class="brand"><span class="p1">kw</span><span class="p2">@root:~$</span><span class="cur"></span></a>
+    <nav class="links" id="navLinks">
+      <a href="#sobre">sobre</a>
+      <a href="#skills">skills</a>
+      <a href="#projetos">projetos</a>
+      <a href="#certificados">certificados</a>
+      <a href="#contato">contato</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">menu</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="status-pill"><span class="dot"></span> disponível para oportunidades</span>
+        <h1 class="hero-name">Kawê Keven<br><span class="last">Dos Santos Figueredo</span></h1>
+        <p class="hero-role">Estudante de <strong>Análise e Desenvolvimento de Sistemas</strong>, desenvolvedor de software com base em <strong>Python, C# e Flutter/Dart</strong>, e entusiasta de <strong>cybersegurança</strong>. Baseado em Laranjeiras, Sergipe.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#projetos">Ver projetos</a>
+          <a class="btn btn-ghost" href="https://github.com/kawe-keven" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="#contato">Contato</a>
+        </div>
+      </div>
+      <div class="term">
+        <div class="term-bar"><span style="background:#ff5f56"></span><span style="background:#ffbd2e"></span><span style="background:#27c93f"></span><span class="title">visitor@portfolio</span></div>
+        <div class="term-body" id="termBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="wrap">
+      <p class="kicker">sobre</p>
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <p>Sou estudante de ADS na Universidade Maurício de Nassau e venho construindo minha base como desenvolvedor de software, transitando entre back-end em Python, aplicações mobile em Flutter/Dart e lógica em C#.</p>
+          <p>Nos últimos meses tenho me aprofundado em computação em nuvem — fundamentos e configuração segura de conta na AWS — e em fundamentos de cybersegurança, área que aparece em quase tudo que escolho estudar ou construir.</p>
+          <p>Gosto de projetos que resolvem um problema real: de um assistente de produtividade com múltiplos agentes de IA a um app de gestão de saúde pessoal. Prefiro aprender fazendo, e uso o GitHub como diário técnico.</p>
+        </div>
+        <div class="facts">
+          <dl>
+            <div class="row"><dt>localização</dt><dd>Laranjeiras, SE — Brasil</dd></div>
+            <div class="row"><dt>formação</dt><dd>ADS, Uni. Maurício de Nassau</dd></div>
+            <div class="row"><dt>foco</dt><dd>Mobile · Back-end · Cloud · Segurança</dd></div>
+            <div class="row"><dt>linguagens</dt><dd>Python · Dart · C# · JavaScript</dd></div>
+            <div class="row"><dt>status</dt><dd style="color:var(--green)">aberto a estágio/júnior</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <p class="kicker">skills</p>
+      <h2 class="section-title">Ferramentas e áreas de estudo</h2>
+      <div class="skills-groups reveal">
+        <div class="skill-group">
+          <h3>mobile</h3>
+          <div class="chip-row">
+            <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg" alt=""><span>Flutter</span></div>
+            <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg" alt=""><span>Dart</span></div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>back-end &amp; linguagens</h3>
+          <div class="chip-row">
+            <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt=""><span>Python</span></div>
+            <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" alt=""><span>FastAPI</span></div>
+            <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" alt=""><span>C#</span></div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>web</h3>
+          <div class="study-grid">
+            <div class="study-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt=""><span>HTML5</span></div>
+            <div class="study-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt=""><span>CSS3</span></div>
+            <div class="study-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt=""><span>JavaScript</span></div>
+            <div class="study-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg" alt=""><span>Bootstrap</span></div>
+            <div class="study-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt=""><span>React</span></div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>cloud</h3>
+          <div class="chip-row">
+            <div class="tool-card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23ff9900' d='M18 47c-7 0-12-5-12-11s5-11 11-11c2-8 9-13 17-13 9 0 16 6 18 14 6 1 10 5 10 11 0 6-5 10-11 10H18Z'/%3E%3Cpath fill='%23232f3e' d='M21 39h22l-4 5H17l4-5Zm4-7h22l-4 5H21l4-5Z'/%3E%3C/svg%3E" alt=""><span>AWS<br>fundamentos</span></div>
+            <div class="tool-card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%237bd6e8' d='M18 48c-8 0-14-6-14-13s6-13 13-13c2-9 10-15 19-15 10 0 18 7 20 16 5 1 9 6 9 12 0 7-6 13-13 13H18Z'/%3E%3Cpath fill='%23080b10' d='M20 35h25l-5 6H15l5-6Zm4-8h25l-5 6H19l5-6Z'/%3E%3C/svg%3E" alt=""><span>Cloud</span></div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>segurança &amp; dados</h3>
+          <div class="study-grid">
+            <div class="study-card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%237bd6e8' d='M32 4 7 14v16c0 15 10 25 25 30 15-5 25-15 25-30V14L32 4Z'/%3E%3Cpath fill='%23080b10' d='m32 14 15 6v10c0 9-5 16-15 21-10-5-15-12-15-21V20l15-6Zm-7 14-4 4 8 8 15-15-4-4-11 11-4-4Z'/%3E%3C/svg%3E" alt=""><span>Cybersegurança</span></div>
+            <div class="study-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt=""><span>Banco de dados</span></div>
+            <div class="study-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt=""><span>GitHub</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos">
+    <div class="wrap">
+      <p class="kicker">projetos</p>
+      <h2 class="section-title">Trabalhos em destaque</h2>
+
+      <div class="proj-featured reveal">
+        <article class="proj-card" data-tilt>
+          <div class="proj-top">
+            <h3 class="proj-name">Caminhando Juntos</h3>
+            <a class="proj-link" href="https://github.com/kawe-keven/aplicativo-caminhando-juntos" target="_blank" rel="noopener">repositório ↗</a>
+          </div>
+          <p class="proj-desc">App Flutter de acessibilidade para pessoas a partir de 50 anos: caminhada monitorada por GPS com filtro de ruído de sinal, leitura por voz com velocidade ajustada, tema de alto contraste e escala de fonte dinâmica, gamificação com recompensas e botão de alerta de emergência.</p>
+          <div class="stack-row">
+            <span class="stack-tag">Flutter · Dart</span><span class="stack-tag">Riverpod</span><span class="stack-tag">go_router</span><span class="stack-tag">Geolocator</span>
+          </div>
+        </article>
+
+        <article class="proj-card" data-tilt>
+          <div class="proj-top">
+            <h3 class="proj-name">Alfred AI</h3>
+            <a class="proj-link" href="https://github.com/kawe-keven/projeto-Alfred" target="_blank" rel="noopener">repositório ↗</a>
+          </div>
+          <p class="proj-desc">Assistente pessoal multi-agente que roda no nível do sistema operacional: entende voz e texto, enxerga a tela, mantém memória de longo prazo via RAG e monitora o ambiente em segundo plano — tudo sobre uma stack de custo zero (Gemini free tier + ChromaDB local + Ollama offline como fallback).</p>
+          <div class="stack-row">
+            <span class="stack-tag">Python · FastAPI</span><span class="stack-tag">React + TypeScript</span><span class="stack-tag">ChromaDB / RAG</span><span class="stack-tag">WebSocket</span>
+          </div>
+        </article>
+
+        <article class="proj-card" data-tilt>
+          <div class="proj-top">
+            <h3 class="proj-name">Health Tech</h3>
+            <a class="proj-link" href="https://github.com/kawe-keven/Mente-Corpo" target="_blank" rel="noopener">repositório ↗</a>
+          </div>
+          <p class="proj-desc">Aplicação web para gestão de saúde pessoal: agenda inteligente de consultas com lembretes, acompanhamento de hábitos saudáveis com metas e progresso visual, e um espaço privado para anotações e registro de sintomas.</p>
+          <div class="stack-row">
+            <span class="stack-tag">HTML5 · CSS3</span><span class="stack-tag">JavaScript ES6+</span><span class="stack-tag">Bootstrap 5</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="proj-minor-grid reveal">
+        <a class="proj-minor" href="https://github.com/kawe-keven/modelagem-de-bd-" target="_blank" rel="noopener">
+          <span class="pm-name">modelagem-de-bd-</span><span class="pm-lang">Modelagem de banco de dados</span>
+        </a>
+        <a class="proj-minor" href="https://github.com/kawe-keven/hamburguer" target="_blank" rel="noopener">
+          <span class="pm-name">hamburguer</span><span class="pm-lang">JavaScript — UI/interação</span>
+        </a>
+        <a class="proj-minor" href="https://github.com/kawe-keven/avaliacao-checkpoint-keven" target="_blank" rel="noopener">
+          <span class="pm-name">avaliacao-checkpoint-keven</span><span class="pm-lang">Dart — exercício avaliativo</span>
+        </a>
+        <a class="proj-minor" href="https://github.com/kawe-keven?tab=repositories" target="_blank" rel="noopener">
+          <span class="pm-name">ver todos →</span><span class="pm-lang">11 repositórios no GitHub</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICADOS -->
+  <section id="certificados">
+    <div class="wrap">
+      <p class="kicker">certificados</p>
+      <h2 class="section-title">Formação complementar</h2>
+      <div class="cert-grid reveal">
+
+        <div class="cert-card" tabindex="0"
+             data-cert-image="certificado%20bradesco.jpg"
+             data-cert-title="Introdução ao Bootcamp — Java e QA"
+             data-cert-issuer="BRADESCO / DIO">
+          <a href="certificado%20bradesco.jpg" target="_blank" rel="noopener">
+            <div class="cert-issuer">BRADESCO / DIO</div>
+            <img class="cert-thumb" src="certificado%20bradesco.jpg" alt="Certificado Bradesco e DIO: Introdução ao Bootcamp - Java e QA">
+            <p class="cert-name">Introdução ao Bootcamp — Java e QA</p>
+            <div class="cert-meta"><span>17 nov 2025</span><span>1h</span></div>
+          </a>
+        </div>
+
+        <div class="cert-card" tabindex="0"
+             data-cert-image="https://hermes.dio.me/certificates/cover/T1TBRRX3.jpg"
+             data-cert-title="Introdução à AWS e ao Universo da Computação em Nuvem"
+             data-cert-issuer="DIO">
+          <a href="https://www.dio.me/certificate/T1TBRRX3/share" target="_blank" rel="noopener">
+            <div class="cert-issuer">DIO</div>
+            <img class="cert-thumb" src="https://hermes.dio.me/certificates/cover/T1TBRRX3.jpg" alt="Certificado DIO: Introdução à AWS e ao Universo da Computação em Nuvem">
+            <p class="cert-name">Introdução à AWS e ao Universo da Computação em Nuvem</p>
+            <div class="cert-meta"><span>DIO.me</span><span>1h</span></div>
+          </a>
+        </div>
+
+        <div class="cert-card" tabindex="0"
+             data-cert-image="https://hermes.dio.me/certificates/cover/B6QYOEN6.jpg"
+             data-cert-title="Fundamentos Essenciais da Infraestrutura AWS"
+             data-cert-issuer="DIO">
+          <a href="https://www.dio.me/certificate/B6QYOEN6/share" target="_blank" rel="noopener">
+            <div class="cert-issuer">DIO</div>
+            <img class="cert-thumb" src="https://hermes.dio.me/certificates/cover/B6QYOEN6.jpg" alt="Certificado DIO: Fundamentos Essenciais da Infraestrutura AWS">
+            <p class="cert-name">Fundamentos Essenciais da Infraestrutura AWS</p>
+            <div class="cert-meta"><span>DIO.me</span><span>1h</span></div>
+          </a>
+        </div>
+
+        <div class="cert-card" tabindex="0"
+             data-cert-image="https://hermes.dio.me/certificates/cover/PREGUCG9.jpg"
+             data-cert-title="Configurando sua Conta AWS com Segurança e Eficiência"
+             data-cert-issuer="DIO">
+          <a href="https://www.dio.me/certificate/PREGUCG9/share" target="_blank" rel="noopener">
+            <div class="cert-issuer">DIO</div>
+            <img class="cert-thumb" src="https://hermes.dio.me/certificates/cover/PREGUCG9.jpg" alt="Certificado DIO: Configurando sua Conta AWS com Segurança e Eficiência">
+            <p class="cert-name">Configurando sua Conta AWS com Segurança e Eficiência</p>
+            <div class="cert-meta"><span>18 abr 2026</span><span>1h</span></div>
+          </a>
+        </div>
+
+        <div class="cert-card" tabindex="0"
+             data-cert-image="certificado%20senai.jpg"
+             data-cert-title="Grand Prix SENAI de Inovação — Saga SENAI de Inovação"
+             data-cert-issuer="SENAI">
+          <a href="https://hackathon.decocms.com/certificate/90323842-1578-4e71-bd54-eb397b78238d" target="_blank" rel="noopener">
+            <div class="cert-issuer">SENAI</div>
+            <img class="cert-thumb" src="certificado%20senai.jpg" alt="Certificado SENAI: Grand Prix SENAI de Inovação">
+            <p class="cert-name">Grand Prix SENAI de Inovação — Saga SENAI de Inovação</p>
+            <div class="cert-meta"><span>18 abr 2026</span><span>20h</span></div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="wrap">
+      <p class="kicker">contato</p>
+      <div class="contact-box reveal">
+        <div>
+          <h2>Vamos conversar?</h2>
+          <p>Aberto a oportunidades de estágio ou desenvolvimento júnior, colaborações em projetos ou só trocar uma ideia sobre front-end, cloud e segurança.</p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link" href="https://github.com/kawe-keven" target="_blank" rel="noopener"><span>GitHub — kawe-keven</span><span class="arrow">↗</span></a>
+          <a class="contact-link" href="https://www.linkedin.com/in/kawê-keven" target="_blank" rel="noopener"><span>LinkedIn — Kawê Keven</span><span class="arrow">↗</span></a>
+          <a class="contact-link" href="https://www.instagram.com/dev.kevx_v" target="_blank" rel="noopener"><span>Instagram — @dev.kevx_v</span><span class="arrow">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<figure class="cert-preview" id="certPreview" aria-hidden="true">
+  <img id="certPreviewImage" src="" alt="">
+  <figcaption id="certPreviewCaption"></figcaption>
+</figure>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 Kawê Keven Dos Santos Figueredo</span>
+    <span>feito com HTML, CSS e JS puros</span>
+  </div>
+</footer>
+
+<script>
+  // mobile nav
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // terminal type sequence
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const termBody = document.getElementById('termBody');
+  const seq = [
+    {p:'visitor@site', c:'whoami', out:'Kawê Keven Dos Santos Figueredo'},
+    {p:'visitor@site', c:'cat role.txt', out:'Estudante de ADS · Dev Front-end · Cybersegurança'},
+    {p:'visitor@site', c:'ls skills/', out:'html css js python csharp aws-fundamentos'},
+    {p:'visitor@site', c:'cat status.txt', out:'aberto a oportunidades — vamos conversar? ↓'}
+  ];
+
+  function renderStatic(){
+    termBody.innerHTML = seq.map(s =>
+      `<p class="ln"><span class="prompt">${s.p}$</span> ${s.c}</p><p class="ln out">${s.out}</p>`
+    ).join('') + '<p class="ln"><span class="prompt">visitor@site$</span> <span class="term-cursor"></span></p>';
+  }
+
+  async function typeLine(el, text, speed){
+    for(let i=0;i<=text.length;i++){
+      el.textContent = text.slice(0,i);
+      await new Promise(r=>setTimeout(r, speed));
+    }
+  }
+
+  async function playSequence(){
+    termBody.innerHTML = '';
+    for(const s of seq){
+      const lnCmd = document.createElement('p');
+      lnCmd.className = 'ln';
+      const promptSpan = document.createElement('span');
+      promptSpan.className = 'prompt';
+      promptSpan.textContent = s.p + '$ ';
+      lnCmd.appendChild(promptSpan);
+      const cmdSpan = document.createElement('span');
+      lnCmd.appendChild(cmdSpan);
+      termBody.appendChild(lnCmd);
+      await typeLine(cmdSpan, s.c, 28);
+      await new Promise(r=>setTimeout(r, 180));
+      const lnOut = document.createElement('p');
+      lnOut.className = 'ln out';
+      lnOut.textContent = s.out;
+      termBody.appendChild(lnOut);
+      await new Promise(r=>setTimeout(r, 260));
+    }
+    const lnFinal = document.createElement('p');
+    lnFinal.className = 'ln';
+    lnFinal.innerHTML = '<span class="prompt">visitor@site$</span> <span class="term-cursor"></span>';
+    termBody.appendChild(lnFinal);
+  }
+
+  if(reduceMotion){ renderStatic(); } else { playSequence(); }
+
+  // certificate preview
+  const certPreview = document.getElementById('certPreview');
+  const certPreviewImage = document.getElementById('certPreviewImage');
+  const certPreviewCaption = document.getElementById('certPreviewCaption');
+
+  const FALLBACK_SVG = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"%3E%3Crect width="1200" height="800" fill="%230d1219"/%3E%3Crect x="38" y="38" width="1124" height="724" rx="8" fill="none" stroke="%23ffb454" stroke-width="5"/%3E%3Ccircle cx="600" cy="250" r="92" fill="%23ffb454" opacity=".16" stroke="%23ffb454" stroke-width="5"/%3E%3Cpath d="m565 250 25 25 50-60" fill="none" stroke="%23ffb454" stroke-width="12"/%3E%3Cpath d="M230 410h740M330 475h540M430 540h340" stroke="%23e7edf4" stroke-width="12" opacity=".75"/%3E%3C/svg%3E';
+
+  function showCertificate(card){
+    const src = card.dataset.certImage || FALLBACK_SVG;
+    const title = card.dataset.certTitle || '';
+    const issuer = card.dataset.certIssuer || 'DIO';
+
+    certPreviewImage.onerror = () => {
+      certPreviewImage.onerror = null;
+      certPreviewImage.src = FALLBACK_SVG;
+    };
+    certPreviewImage.src = src;
+    certPreviewImage.alt = title;
+    certPreviewCaption.textContent = issuer + ' - ' + title;
+
+    certPreview.classList.add('visible');
+    certPreview.setAttribute('aria-hidden', 'false');
+  }
+
+  function hideCertificate(){
+    certPreview.classList.remove('visible');
+    certPreview.setAttribute('aria-hidden', 'true');
+  }
+
+  document.querySelectorAll('[data-cert-title]').forEach(card=>{
+    card.addEventListener('mouseenter', ()=>showCertificate(card));
+    card.addEventListener('mouseleave', hideCertificate);
+    card.addEventListener('focus', ()=>showCertificate(card));
+    card.addEventListener('blur', hideCertificate);
+  });
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduceMotion){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(el=>io.observe(el));
+  } else {
+    revealEls.forEach(el=>el.classList.add('in'));
+  }
+
+  // subtle tilt on featured project cards
+  if(!reduceMotion){
+    document.querySelectorAll('[data-tilt]').forEach(card=>{
+      card.addEventListener('mousemove', (e)=>{
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left)/r.width - 0.5;
+        const y = (e.clientY - r.top)/r.height - 0.5;
+        card.style.transform = `perspective(700px) rotateX(${(-y*3).toFixed(2)}deg) rotateY(${(x*3).toFixed(2)}deg) translateY(-2px)`;
+      });
+      card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+    });
+  }
+</script>
+
+</body>
+</html>
