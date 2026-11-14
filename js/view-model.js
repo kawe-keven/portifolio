@@ -8,35 +8,6 @@ function renderTerminalStatic(termBody) {
   ).join('');
 }
 
-function typeHeroName() {
-  const heading = document.querySelector('.hero-name');
-  if (!heading || reduceMotion) return;
-
-  const firstLine = heading.firstChild;
-  const lastLine = heading.querySelector('.last');
-  if (!firstLine || !lastLine) return;
-
-  const firstText = Array.from(firstLine.textContent.trim());
-  const lastText = Array.from(lastLine.textContent);
-  heading.setAttribute('aria-label', `${firstText.join('')} ${lastText.join('')}`);
-  firstLine.textContent = '';
-  lastLine.textContent = '';
-  heading.classList.add('typing');
-
-  let firstIndex = 0;
-  let lastIndex = 0;
-  const timer = setInterval(() => {
-    if (firstIndex < firstText.length) {
-      firstLine.textContent += firstText[firstIndex++];
-    } else if (lastIndex < lastText.length) {
-      lastLine.textContent += lastText[lastIndex++];
-    } else {
-      clearInterval(timer);
-      heading.classList.remove('typing');
-    }
-  }, 55);
-}
-
 function typeLine(element, text, speed) {
   return new Promise((resolve) => {
     let index = 0;
@@ -199,9 +170,7 @@ function setupCertificates() {
 }
 
 function setupReveal() {
-  const revealElements = document.querySelectorAll(
-    '.reveal, section .kicker, section .section-title, #sobre .about-text p, #skills .skill-group, #projetos .proj-card, #projetos .proj-minor, #certificados .cert-card, #contato .contact-box > div'
-  );
+  const revealElements = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !reduceMotion) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -235,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCertificates();
   setupReveal();
   setupTilt();
-  typeHeroName();
   const terminal = document.getElementById('termBody');
   if (reduceMotion) {
     renderTerminalStatic(terminal);

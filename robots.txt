@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://portifolio.kevenkawe15.workers.dev/site.xml
