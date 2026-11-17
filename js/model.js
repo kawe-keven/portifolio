@@ -1,7 +1,7 @@
 // Model: dados que alimentam os componentes interativos da pagina.
 export const terminalSequence = [
   { prompt: 'visitor@site', command: 'whoami', output: 'Kawe Keven Dos Santos Figueredo' },
-  { prompt: 'visitor@site', command: 'cat role.txt', output: 'Estudante de ADS - Dev Front-end - Cyberseguranca' },
+  { prompt: 'visitor@site', command: 'cat role.txt', output: 'Dev Fullstack - Cyberseguranca' },
   { prompt: 'visitor@site', command: 'ls skills/', output: 'html css js python csharp aws cloud' },
   { prompt: 'visitor@site', command: 'cat status.txt', output: 'aberto a oportunidades - vamos conversar? ↓' }
 ];
